@@ -6,14 +6,22 @@ require 'pry'
 
 #TASK 2
 def experienced?(candidate)
+  unless candidate.has_key?(:years_of_experience)
+    raise ArgumentError, "candidate must have a :years_of_experience key"
+  end
   candidate[:years_of_experience] >= 2
 end
 
 # TASK 3
-def find(id)
+def find(id) #methods do not need begin..end block
+  raise ArgumentError, "@candidates must be an Array" if @candidates.nil?
   @candidates.detect do |candidate| 
     candidate[:id] == id 
   end
+  rescue Exception => my_exception
+    puts "An error of type #{my_exception.class} occurred."
+    puts "Message is: #{my_exception.message}."
+    puts "The issue comes from #{my_exception.backtrace.inspect}."
 end
 
 # More methods will go below
